@@ -86,10 +86,8 @@ const getAllBookshelf = (request, h) => {
     };
   } else {
     const { reading, finished, name } = request.query;
-    const readStatus = bookshelf.filter((e) => e.reading === reading);
-    const finishedStatus = bookshelf.filter((e) => e.finished === finished);
-
-    if (reading === 1) {
+    if (reading == 1) {
+      const readStatus = bookshelf.filter((e) => e.reading == true);
       const response = h.response({
         status: 'success',
         data: {
@@ -103,7 +101,23 @@ const getAllBookshelf = (request, h) => {
 
       response.code(200);
       return response;
-    } else if (reading === 0 && reading / reading === 1) {
+    } else if (reading == 0) {
+      const readStatus = bookshelf.filter((e) => e.reading == false);
+
+      if (reading == '') {
+        const bookshelfData = bookshelf.map((e) => ({
+          id: e.id,
+          name: e.name,
+          publisher: e.publisher,
+        }));
+        return {
+          status: 'success',
+          data: {
+            books: bookshelfData,
+          },
+        };
+      }
+
       const response = h.response({
         status: 'success',
         data: {
@@ -113,27 +127,14 @@ const getAllBookshelf = (request, h) => {
             publisher: e.publisher,
           })),
         },
-        readingFalse: reading,
       });
 
       response.code(200);
       return response;
-    } else if (reading === '') {
-      const bookshelfData = bookshelf.map((e) => ({
-        id: e.id,
-        name: e.name,
-        publisher: e.publisher,
-      }));
-
-      return {
-        status: 'success',
-        data: {
-          books: bookshelfData,
-        },
-      };
     }
 
-    if (finished === 1) {
+    if (finished == 1) {
+      const finishedStatus = bookshelf.filter((e) => e.finished == true);
       const response = h.response({
         status: 'success',
         data: {
@@ -147,7 +148,23 @@ const getAllBookshelf = (request, h) => {
 
       response.code(200);
       return response;
-    } else if (finished === 0 && finished / finished === 1) {
+    } else if (finished == 0) {
+      const finishedStatus = bookshelf.filter((e) => e.finished == false);
+
+      if (finished == '') {
+        const bookshelfData = bookshelf.map((e) => ({
+          id: e.id,
+          name: e.name,
+          publisher: e.publisher,
+        }));
+        return {
+          status: 'success',
+          data: {
+            books: bookshelfData,
+          },
+        };
+      }
+
       const response = h.response({
         status: 'success',
         data: {
@@ -161,24 +178,18 @@ const getAllBookshelf = (request, h) => {
 
       response.code(200);
       return response;
-    } else if (finished === '') {
-      const bookshelfData = bookshelf.map((e) => ({
-        id: e.id,
-        name: e.name,
-        publisher: e.publisher,
-      }));
-
-      return {
-        status: 'success',
-        data: {
-          books: bookshelfData,
-        },
-      };
     }
-
     if (name || name / name === 1) {
       const lowerName = `${name.toLowerCase()}`;
       const dicodingName = bookshelf.filter((e) => e.name.toLowerCase().includes(lowerName));
+      if (lowerName !== 'dicoding') {
+        const response = h.response({
+          status: 'fail',
+          message: 'Buku tidak ditemukan',
+        });
+        response.code(404);
+        return response;
+      }
 
       const response = h.response({
         status: 'success',
@@ -190,10 +201,9 @@ const getAllBookshelf = (request, h) => {
           })),
         },
       });
-
       response.code(200);
       return response;
-    } else if (name === '') {
+    } else if (name == '') {
       const response = h.response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
