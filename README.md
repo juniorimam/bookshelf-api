@@ -6,9 +6,9 @@ Bookshelf API for Submission in Learn to Make Back-End Apps for Beginners from D
 
 ## Read to know
 
- - [How to run](##run-locally)
- - [API Reference](##api-reference)
- - [Tech Stack](##tech-stack)
+ - [How to run](#run-locally)
+ - [API Reference](#api-reference)
+ - [Tech Stack](#tech-stack)
 
 
 ## Run Locally
