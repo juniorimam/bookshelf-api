@@ -86,8 +86,8 @@ const getAllBookshelf = (request, h) => {
     };
   } else {
     const { reading, finished, name } = request.query;
-    if (reading == 1) {
-      const readStatus = bookshelf.filter((e) => e.reading == true);
+    if (reading === '1') {
+      const readStatus = bookshelf.filter((e) => e.reading === true);
       const response = h.response({
         status: 'success',
         data: {
@@ -101,10 +101,10 @@ const getAllBookshelf = (request, h) => {
 
       response.code(200);
       return response;
-    } else if (reading == 0) {
-      const readStatus = bookshelf.filter((e) => e.reading == false);
+    } else if (reading === '0') {
+      const readStatus = bookshelf.filter((e) => e.reading === false);
 
-      if (reading == '') {
+      if (reading === '') {
         const bookshelfData = bookshelf.map((e) => ({
           id: e.id,
           name: e.name,
@@ -132,9 +132,8 @@ const getAllBookshelf = (request, h) => {
       response.code(200);
       return response;
     }
-
-    if (finished == 1) {
-      const finishedStatus = bookshelf.filter((e) => e.finished == true);
+    if (finished === '1') {
+      const finishedStatus = bookshelf.filter((e) => e.finished === true);
       const response = h.response({
         status: 'success',
         data: {
@@ -148,10 +147,10 @@ const getAllBookshelf = (request, h) => {
 
       response.code(200);
       return response;
-    } else if (finished == 0) {
-      const finishedStatus = bookshelf.filter((e) => e.finished == false);
+    } else if (finished === '0') {
+      const finishedStatus = bookshelf.filter((e) => e.finished === false);
 
-      if (finished == '') {
+      if (finished === '') {
         const bookshelfData = bookshelf.map((e) => ({
           id: e.id,
           name: e.name,
@@ -203,7 +202,7 @@ const getAllBookshelf = (request, h) => {
       });
       response.code(200);
       return response;
-    } else if (name == '') {
+    } else if (name === '') {
       const response = h.response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
