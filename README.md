@@ -112,8 +112,6 @@ curl --location --request GET 'http://localhost:5000?finished='
 
 ### Change books data
 
-Just add the `--data-raw` object list according to your update data requirement
-
 `PUT /books/${id}`
 
 ```
